@@ -44,8 +44,8 @@ async function onFormSubmit(event) {
       }
   
       createGallery(data.hits);
-      input.value = '';
-      if (data.hits.length === 15) {
+      const totalPages = Math.ceil(data.totalHits / 15);
+      if (currentPage < totalPages) {
         showLoadMoreButton();
       } else {
         hideLoadMoreButton();
@@ -58,6 +58,7 @@ async function onFormSubmit(event) {
       });
     } finally {
       hideLoader();
+      input.value = '';
     }
 }
 
